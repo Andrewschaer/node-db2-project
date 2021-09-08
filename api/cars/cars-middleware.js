@@ -19,19 +19,19 @@ exports.checkCarId = (req, res, next) => {
 exports.checkCarPayload = (req, res, next) => {
   if (req.body.vin === undefined) {
     next({ 
-      message: 'Vin is missing',
+      message: 'vin is missing',
       status: 400 });
   } else if (req.body.make === undefined) {
     next({ 
-      message: 'Make is missing',
+      message: 'make is missing',
       status: 400 });
   } else if (req.body.model === undefined) {
     next({ 
-      message: 'Model is missing',
+      message: 'model is missing',
       status: 400 });
   } else if (req.body.mileage === undefined) {
     next({ 
-      message: 'Mileage is missing',
+      message: 'mileage is missing',
       status: 400 });
   } else {
     next();
@@ -39,12 +39,12 @@ exports.checkCarPayload = (req, res, next) => {
 };
 
 exports.checkVinNumberValid = (req, res, next) => {
-  if (vinValidator(req.body.vin)) {
+  if (vinValidator.validate(req.body.vin)) {
+    next();
+  } else {
     next({
       message: `vin ${req.body.vin} is invalid`,
       status: 400 });
-  } else {
-    next();
   }
 };
 
